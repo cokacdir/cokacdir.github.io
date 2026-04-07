@@ -1,0 +1,32 @@
+title: "Cokacdir's Blog"
+description: "Thoughts, ideas, and stories worth sharing."
+url: "https://cokacdir.github.io"
+baseurl: ""
+author:
+  name: "cokacdir"
+
+# Build settings
+theme: null
+plugins:
+  - jekyll-paginate
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Pagination
+paginate: 6
+paginate_path: "/page:num/"
+
+# Permalink
+permalink: /:year/:month/:day/:title/
+
+# Markdown
+markdown: kramdown
+highlighter: rouge
+
+# Exclude
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .bundle
