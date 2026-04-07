@@ -1,19 +1,23 @@
 ---
 layout: default
-title: About
+title: 블로그 소개
 ---
 
 <div class="about-page">
-  <h1>About Me</h1>
+  <h1>법, 알면<br><em>힘이 됩니다</em></h1>
   <p>
-    Hi, I'm <strong>cokacdir</strong>. This is my personal blog where I write about technology,
-    design, productivity, and the things I find interesting.
+    안녕하세요, <strong>생활법률 이야기</strong>입니다.
   </p>
   <p>
-    I believe in learning in public — sharing ideas before they're fully formed,
-    building things that might fail, and writing as a way to think more clearly.
+    법률은 어렵고 복잡하다는 인식이 많습니다. 하지만 우리의 일상은 이미 수많은 법률로 둘러싸여 있습니다. 전세 계약, 직장 생활, 온라인 쇼핑, 교통사고... 이 모든 상황에서 법이 우리를 보호하고 있지만, 모르면 당할 수밖에 없습니다.
   </p>
   <p>
-    This blog is built with Jekyll and hosted on GitHub Pages.
+    이 블로그는 법률 전문가가 아닌 일반 시민의 눈높이에서 <strong>실생활에서 꼭 알아야 할 법률 상식</strong>을 쉽고 재미있게 풀어드리는 공간입니다.
+  </p>
+  <p>
+    어렵게만 느껴지는 민법, 노동법, 소비자보호법, 부동산 관련 법을 실제 사례를 중심으로 설명합니다. '이런 상황에서 나는 어떤 권리가 있을까?'라는 질문에 답해드리겠습니다.
+  </p>
+  <p style="font-size:13px; color: var(--text-subtle);">
+    ※ 본 블로그의 내용은 일반적인 법률 정보 제공을 목적으로 하며, 법률 자문이 아닙니다. 구체적인 법률 문제는 반드시 전문 변호사와 상담하시기 바랍니다.
   </p>
 </div>

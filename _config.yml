@@ -1,9 +1,9 @@
-title: "Cokacdir's Blog"
-description: "Thoughts, ideas, and stories worth sharing."
+title: "생활법률 이야기"
+description: "어렵게만 느껴지는 법률, 쉽고 재미있게 풀어드립니다. 일상 속 법률 상식을 함께 알아가요."
 url: "https://cokacdir.github.io"
 baseurl: ""
 author:
-  name: "cokacdir"
+  name: "생활법률 이야기"
 
 # Build settings
 theme: null

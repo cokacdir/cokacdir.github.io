@@ -1,70 +1,121 @@
 ---
 layout: default
-title: Home
+title: 홈
 paginate: true
 ---
 
 <!-- Hero Section -->
 <section class="hero">
   <div class="hero-bg">
-    <div class="hero-orb hero-orb-1"></div>
-    <div class="hero-orb hero-orb-2"></div>
-    <div class="hero-orb hero-orb-3"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-glow"></div>
   </div>
   <div class="hero-inner">
-    <div class="hero-badge">✦ Welcome to my space</div>
-    <h1 class="hero-title">
-      Ideas worth<br>
-      <span class="hero-title-accent">exploring.</span>
-    </h1>
-    <p class="hero-subtitle">{{ site.description }}</p>
-    <div class="hero-cta">
-      <a href="#posts" class="btn-primary">Read Articles ↓</a>
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      일상 속 법률 상식
     </div>
-    <div class="hero-stats">
-      <div class="stat">
-        <span class="stat-num">{{ site.posts | size }}</span>
-        <span class="stat-label">Articles</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat">
-        <span class="stat-num">∞</span>
-        <span class="stat-label">Ideas</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat">
-        <span class="stat-num">1</span>
-        <span class="stat-label">Author</span>
+    <h1 class="hero-title">
+      법, 알면<br>
+      <em class="hero-title-em">무섭지 않습니다</em>
+    </h1>
+    <p class="hero-subtitle">복잡하고 어려운 법률 이야기를 누구나 이해할 수 있도록 쉽게 풀어드립니다. 실생활에서 꼭 알아야 할 법률 상식을 함께 알아가요.</p>
+    <div class="hero-cta-wrap">
+      <a href="#posts" class="btn-primary">글 읽어보기 ↓</a>
+      <a href="/about" class="btn-secondary">블로그 소개</a>
+    </div>
+
+    <div class="hero-categories">
+      <span class="hero-cat-label">주요 카테고리</span>
+      <div class="hero-cat-list">
+        <a href="/" class="hero-cat">🏠 부동산</a>
+        <a href="/" class="hero-cat">💼 노동·고용</a>
+        <a href="/" class="hero-cat">👨‍👩‍👧 가족·상속</a>
+        <a href="/" class="hero-cat">💰 금전·계약</a>
+        <a href="/" class="hero-cat">🚗 교통·사고</a>
+        <a href="/" class="hero-cat">📱 소비자</a>
       </div>
     </div>
   </div>
+
   <div class="hero-scroll-hint">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
+    <div class="scroll-mouse">
+      <div class="scroll-wheel"></div>
+    </div>
+    <span>스크롤</span>
   </div>
 </section>
 
-<!-- Featured Post (Latest) -->
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-num">{{ site.posts | size }}</span>
+      <span class="stat-label">법률 포스트</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">6+</span>
+      <span class="stat-label">법률 카테고리</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">무료</span>
+      <span class="stat-label">법률 정보 제공</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">매주</span>
+      <span class="stat-label">새 글 업데이트</span>
+    </div>
+  </div>
+</div>
+
+<!-- Featured Post -->
 {% assign featured = paginator.posts.first %}
 {% if paginator.page == 1 and featured %}
 <section class="featured-section">
   <div class="section-inner">
-    <div class="section-label">✦ Featured</div>
+    <div class="section-eyebrow">
+      <span class="eyebrow-line"></span>
+      <span class="eyebrow-text">이번 주 추천 글</span>
+      <span class="eyebrow-line"></span>
+    </div>
     <a href="{{ featured.url }}" class="featured-card">
-      <div class="featured-card-body">
+      <div class="featured-card-left">
         {% if featured.category %}
         <span class="card-category">{{ featured.category }}</span>
         {% endif %}
         <h2 class="featured-title">{{ featured.title }}</h2>
-        <p class="featured-excerpt">{{ featured.excerpt | strip_html | truncatewords: 30 }}</p>
+        {% if featured.subtitle %}
+        <p class="featured-subtitle-text">{{ featured.subtitle }}</p>
+        {% endif %}
+        <p class="featured-excerpt">{{ featured.excerpt | strip_html | truncatewords: 35 }}</p>
         <div class="featured-meta">
-          <span class="meta-date">{{ featured.date | date: "%b %d, %Y" }}</span>
-          <span class="meta-read">Read More →</span>
+          <span class="meta-date">{{ featured.date | date: "%Y년 %m월 %d일" }}</span>
+          {% if featured.difficulty %}
+          <span class="meta-diff difficulty-{{ featured.difficulty }}">
+            {% if featured.difficulty == 'easy' %}초급{% elsif featured.difficulty == 'medium' %}중급{% else %}고급{% endif %}
+          </span>
+          {% endif %}
+          <span class="meta-read-more">자세히 읽기 →</span>
         </div>
       </div>
-      <div class="featured-card-deco">
-        <div class="deco-circle"></div>
-        <div class="deco-plus">+</div>
+      <div class="featured-card-right">
+        <div class="featured-emblem">
+          <div class="emblem-outer">
+            <div class="emblem-inner">
+              <span class="emblem-icon">⚖</span>
+            </div>
+          </div>
+          {% if featured.related_laws %}
+          <div class="featured-laws">
+            {% for law in featured.related_laws limit: 2 %}
+            <span class="law-tag">{{ law }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
       </div>
     </a>
   </div>
@@ -75,11 +126,15 @@ paginate: true
 <section class="posts-section" id="posts">
   <div class="section-inner">
     <div class="section-header">
-      <div class="section-label">✦ All Posts</div>
-      <h2 class="section-title">Latest Articles</h2>
+      <div class="section-eyebrow">
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow-text">전체 포스트</span>
+        <span class="eyebrow-line"></span>
+      </div>
+      <h2 class="section-title">법률 이야기 모음</h2>
       <p class="section-subtitle">
-        Page {{ paginator.page }} of {{ paginator.total_pages }}
-        &nbsp;·&nbsp; {{ paginator.total_posts }} posts total
+        전체 {{ paginator.total_posts }}개 포스트 중
+        {{ paginator.page }}페이지 / {{ paginator.total_pages }}페이지
       </p>
     </div>
 
@@ -90,16 +145,26 @@ paginate: true
       {% for post in paginator.posts offset: start %}
       <article class="post-card">
         <div class="post-card-inner">
-          {% if post.category %}
-          <span class="card-category">{{ post.category }}</span>
-          {% endif %}
+          <div class="card-top">
+            {% if post.category %}
+            <span class="card-category">{{ post.category }}</span>
+            {% endif %}
+            {% if post.difficulty %}
+            <span class="card-difficulty difficulty-{{ post.difficulty }}">
+              {% if post.difficulty == 'easy' %}초급{% elsif post.difficulty == 'medium' %}중급{% else %}고급{% endif %}
+            </span>
+            {% endif %}
+          </div>
           <h3 class="card-title">
             <a href="{{ post.url }}">{{ post.title }}</a>
           </h3>
-          <p class="card-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+          {% if post.subtitle %}
+          <p class="card-subtitle">{{ post.subtitle }}</p>
+          {% endif %}
+          <p class="card-excerpt">{{ post.excerpt | strip_html | truncatewords: 22 }}</p>
           <div class="card-footer">
-            <span class="card-date">{{ post.date | date: "%b %d, %Y" }}</span>
-            <a href="{{ post.url }}" class="card-read-more">Read →</a>
+            <span class="card-date">{{ post.date | date: "%Y.%m.%d" }}</span>
+            <a href="{{ post.url }}" class="card-read-more">읽기 →</a>
           </div>
         </div>
       </article>
@@ -108,25 +173,25 @@ paginate: true
 
     <!-- Pagination -->
     {% if paginator.total_pages > 1 %}
-    <nav class="pagination" aria-label="Posts pagination">
+    <nav class="pagination" aria-label="페이지 탐색">
       <div class="pagination-inner">
 
         {% if paginator.previous_page %}
           {% if paginator.previous_page == 1 %}
           <a href="/" class="pagination-btn pagination-prev">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-            Prev
+            이전
           </a>
           {% else %}
           <a href="{{ paginator.previous_page_path }}" class="pagination-btn pagination-prev">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-            Prev
+            이전
           </a>
           {% endif %}
         {% else %}
-        <span class="pagination-btn pagination-prev disabled">
+        <span class="pagination-btn disabled">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-          Prev
+          이전
         </span>
         {% endif %}
 
@@ -144,12 +209,12 @@ paginate: true
 
         {% if paginator.next_page %}
         <a href="{{ paginator.next_page_path }}" class="pagination-btn pagination-next">
-          Next
+          다음
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
         {% else %}
-        <span class="pagination-btn pagination-next disabled">
-          Next
+        <span class="pagination-btn disabled">
+          다음
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
         </span>
         {% endif %}
