@@ -196,7 +196,18 @@ paginate: true
         {% endif %}
 
         <div class="pagination-pages">
-          {% for i in (1..paginator.total_pages) %}
+          {% comment %} 현재 페이지 기준 앞뒤 2개씩만 표시 {% endcomment %}
+          {% assign page_start = paginator.page | minus: 2 %}
+          {% if page_start < 1 %}{% assign page_start = 1 %}{% endif %}
+          {% assign page_end = paginator.page | plus: 2 %}
+          {% if page_end > paginator.total_pages %}{% assign page_end = paginator.total_pages %}{% endif %}
+
+          {% if page_start > 1 %}
+            <a href="/" class="pagination-page">1</a>
+            {% if page_start > 2 %}<span class="pagination-ellipsis">⋯</span>{% endif %}
+          {% endif %}
+
+          {% for i in (page_start..page_end) %}
             {% if i == paginator.page %}
             <span class="pagination-page current">{{ i }}</span>
             {% elsif i == 1 %}
@@ -205,6 +216,11 @@ paginate: true
             <a href="/page{{ i }}/" class="pagination-page">{{ i }}</a>
             {% endif %}
           {% endfor %}
+
+          {% if page_end < paginator.total_pages %}
+            {% if page_end < paginator.total_pages | minus: 1 %}<span class="pagination-ellipsis">⋯</span>{% endif %}
+            <a href="/page{{ paginator.total_pages }}/" class="pagination-page">{{ paginator.total_pages }}</a>
+          {% endif %}
         </div>
 
         {% if paginator.next_page %}
